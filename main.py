@@ -4,6 +4,12 @@ import config
 from telebot import types
 from expiration_date import expiration_date
 
+### Deploy HEROKU ###
+"""
+git init
+
+"""
+
 
 bot = telebot.TeleBot(config.TOKEN)
 

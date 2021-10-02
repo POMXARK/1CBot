@@ -1,7 +1,14 @@
 import datetime
 
+
 def expiration_date(number_of_hours):
-    now = datetime.datetime.now()
+
+    def get_current_time() -> datetime: # часовой пояс
+        delta = datetime.timedelta(hours=10, minutes=0)
+        return datetime.datetime.now(datetime.timezone.utc) + delta
+
+
+    now = get_current_time()
     #print(now.strftime("%d.%m.%Y %H:%M:%S"))
 
     date_today = now.strftime("%a %b %d 8:00:00 %Y")
@@ -20,7 +27,7 @@ def expiration_date(number_of_hours):
 
     return f"текущее время в системе: {now_datetime}\n{(expiration_date(number_of_hours))}"
 
-#print(expiration_date(36))
+print(expiration_date(36))
 
 #print(expiration_date(72))
 #print(expiration_date(140))
