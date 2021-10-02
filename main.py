@@ -7,7 +7,7 @@ from expiration_date import expiration_date
 ### Deploy HEROKU ###
 """
 git init
-
+git push heroku master
 """
 
 
@@ -20,27 +20,29 @@ markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
 item1 = types.KeyboardButton("Дата окончания срока годности")
 markup.add(item1)
 
-@bot.message_handler(content_types=['text'])
+#@bot.message_handler(content_types=['text'])
 def welcome(pm):
     sent_msg = bot.send_message(pm.chat.id, "Добрый день, Сэр! Пожалуйства введите количество часов",reply_markup=keyboard)
     bot.register_next_step_handler(sent_msg, number_of_hours_handler)  # Next message will call the name_handler function
 
-@bot.message_handler(commands=["newkeyboard"])
+#@bot.message_handler(commands=["newkeyboard"])
 
 def number_of_hours_handler(pm):
     try:
         number_of_hours = expiration_date(int(pm.text))
         sent_msg = bot.send_message(pm.chat.id, f"{number_of_hours}")
+        welcome(pm)
     except ValueError:
         sent_msg = bot.send_message(pm.chat.id, f"Сэр, вы ввели некоректное число, попробуйте снова")
+        welcome(pm)
     #number_of_hours = pm.text
 
     #bot.register_next_step_handler(sent_msg, age_handler, number_of_hours)  # Next message will call the age_handler function
 
 
-def age_handler(pm, name):
-    age = pm.text
-    bot.send_message(pm.chat.id, f"Your name is {name}, and your age is {age}.", reply_markup=keyboard)
+#def age_handler(pm, name):
+#    age = pm.text
+#    bot.send_message(pm.chat.id, f"Your name is {name}, and your age is {age}.", reply_markup=keyboard)
 """
 @bot.message_handler(commands=["new_keyboard_for_all_users"])
 def send_new_keyboard (message):
