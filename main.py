@@ -22,7 +22,7 @@ markup.add(item1)
 
 @bot.message_handler(content_types=['text'])
 def welcome(pm):
-    sent_msg = bot.send_message(pm.chat.id, "Добрый день, Сэр! Пожалуйста введите количество часов",reply_markup=keyboard)
+    sent_msg = bot.send_message(pm.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",reply_markup=keyboard)
     bot.register_next_step_handler(sent_msg, number_of_hours_handler)  # Next message will call the name_handler function
 
 #@bot.message_handler(commands=["newkeyboard"])
