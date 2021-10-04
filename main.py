@@ -11,19 +11,13 @@ git init
 git push heroku master
 """
 
-global  text_1
+global text_1
 text_1 = "Инфо"
 
 bot = telebot.TeleBot(config.TOKEN)
 
 keyboard = types.ReplyKeyboardMarkup() # обновить клавиатуру
 
-# keyboard
-#markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
-#item1 = types.KeyboardButton("Дата окончания срока годности")
-#markup.add(item1)
-
-######
 @bot.message_handler(commands=['start'])
 def welcome(message):
 
@@ -43,7 +37,7 @@ def welcome(message):
 @bot.message_handler(content_types=['text'])
 def lalala(message):
     if message.chat.type == 'private':
-        if message.text == text_1:
+        if message.text == "text_1":
             #bot.send_message(message.chat.id, str(random.randint(0, 100)))
             sent_msg = bot.send_message(message.chat.id, "Что вы хотите узнать?")
         elif message.text == 'Дата окончания срока годности':
@@ -52,12 +46,6 @@ def lalala(message):
                                         reply_markup=keyboard)
             bot.register_next_step_handler(sent_msg,
                                            number_of_hours_handler)  # Next message will call the name_handler function
-
-           # markup = types.InlineKeyboardMarkup(row_width=2)
-           # item1 = types.InlineKeyboardButton("24", callback_data='24')
-           # item2 = types.InlineKeyboardButton("36", callback_data='36')
-           # markup.add(item1, item2)
-            #bot.send_message(message.chat.id, 'Выбери количество часов', reply_markup=markup)
         elif message.text == text_1:
 
             markup = types.InlineKeyboardMarkup(row_width=3)
@@ -65,7 +53,7 @@ def lalala(message):
             item1 = types.InlineKeyboardButton("Хорошо", callback_data='good')
             item2 = types.InlineKeyboardButton("Не очень", callback_data='bad')
 
-            markup.add(item1, item2)
+            markup.add(item0,item1, item2)
 
             bot.send_message(message.chat.id, 'Отлично, сам как?', reply_markup=markup)
         else:
