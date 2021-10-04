@@ -93,9 +93,9 @@ def callback_inline(call):
             elif call.data == 'abbreviations':
                 bot.send_message(call.message.chat.id, info_3)
             elif call.data == 'admission':
-                bot.send_message(call.message.chat.id, info_4)
-
-
+                bot.send_message(call.message.chat.id, info_4,callback_data='tssd')
+            elif call.data == 'tssd':
+                bot.send_message(call.message.chat.id, "info_4")
     except Exception as e:
         print(repr(e))
 
