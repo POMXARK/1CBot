@@ -107,7 +107,7 @@ def number_of_hours_handler(pm):
     try:
         number_of_hours = expiration_date(int(pm.text))
         sent_msg = bot.send_message(pm.chat.id, f"{number_of_hours}")
-        welcome(pm)
+        #welcome(pm)
     except ValueError:
         sent_msg = bot.send_message(pm.chat.id, f"Сэр, вы ввели некоректное число, попробуйте снова")
         #welcome(pm)
