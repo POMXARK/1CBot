@@ -83,6 +83,7 @@ def callback_inline(call):
             elif call.data == 'abbreviations':
                 bot.send_message(call.message.chat.id, info_3)
             elif call.data == 'admission':
+                @bot.message_handler(content_types=['text'])
                 def lalalas(message):
                     if message.chat.type == 'private':
                         #bot.send_message(call.message.chat.id, info_4)
