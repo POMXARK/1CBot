@@ -11,12 +11,6 @@ git init
 git push heroku master
 """
 
-markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
-item1 = types.KeyboardButton("🎲 Рандомное число")
-item2 = types.KeyboardButton("😊 Как дела?")
-item3 = types.KeyboardButton("Дата окончания срока годности")
-markup.add(item1, item2, item3)
-
 
 bot = telebot.TeleBot(config.TOKEN)
 
@@ -30,15 +24,15 @@ keyboard = types.ReplyKeyboardMarkup() # обновить клавиатуру
 ######
 @bot.message_handler(commands=['start'])
 def welcome(message):
-    #sti = open('static/welcome.webp', 'rb')
-   # bot.send_sticker(message.chat.id, sti)
+    sent_msg = bot.send_message(message.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",
+                                reply_markup=keyboard)
+    bot.register_next_step_handler(sent_msg,
+                                   number_of_hours_handler)  # Next message will call the name_handler function
 
     # keyboard
     markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
     item1 = types.KeyboardButton("🎲")
     item2 = types.KeyboardButton("😊")
-    #item1 = types.KeyboardButton("🎲 Рандомное число")
-    #item2 = types.KeyboardButton("😊 Как дела?")
     item3 = types.KeyboardButton("Дата окончания срока годности")
     markup.add(item1, item2,item3)
 
@@ -100,7 +94,7 @@ def callback_inline(call):
 ####
 
 
-@bot.message_handler(content_types=['text'])
+#@bot.message_handler(content_types=['text'])
 def welcome(pm):
     sent_msg = bot.send_message(pm.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",reply_markup=keyboard)
     bot.register_next_step_handler(sent_msg, number_of_hours_handler)  # Next message will call the name_handler function
