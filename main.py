@@ -69,15 +69,6 @@ def callback_inline(call):
                 bot.send_message(call.message.chat.id, 'Вот и отличненько 😊')
             elif call.data == 'bad':
                 bot.send_message(call.message.chat.id, 'Бывает 😢')
-            # if call.data == '24':
-            #    pass
-            # remove inline buttons
-            # bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="😊 Как дела?",
-            #                      reply_markup=None)
-
-            # show alert
-            # bot.answer_callback_query(callback_query_id=call.id, show_alert=False,
-            #                          text="ЭТО ТЕСТОВОЕ УВЕДОМЛЕНИЕ!!11")
 
     except Exception as e:
         print(repr(e))
