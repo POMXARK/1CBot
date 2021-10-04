@@ -10,22 +10,22 @@ heroku login
 git init
 git push heroku master
 """
-
+global text_1, info_1
 text_1 = "Инфо"
 info_1 = "Когда принесли телефон (ТСД) Печать этикеток и ценников -> заполнить из ТСД -> выгружать пустые строки -> выводить отчет -> выполнить загрузку из ТСД (после удалить задание из устройства ТСД)"
 bot = telebot.TeleBot(config.TOKEN)
 
-keyboard = types.ReplyKeyboardMarkup() # обновить клавиатуру
+keyboard = types.ReplyKeyboardMarkup()  # обновить клавиатуру
+
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
-
     # keyboard
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item1 = types.KeyboardButton("🎲")
     item2 = types.KeyboardButton(text_1)
     item3 = types.KeyboardButton("Дата окончания срока годности")
-    markup.add(item1, item2,item3)
+    markup.add(item1, item2, item3)
 
     bot.send_message(message.chat.id,
                      "Добро пожаловать, {0.first_name}!\nЯ - <b>{1.first_name}</b>, бот созданный чтобы быть подопытным кроликом.".format(
@@ -37,7 +37,7 @@ def welcome(message):
 def lalala(message):
     if message.chat.type == 'private':
         if message.text == "text_1":
-            #bot.send_message(message.chat.id, str(random.randint(0, 100)))
+            # bot.send_message(message.chat.id, str(random.randint(0, 100)))
             sent_msg = bot.send_message(message.chat.id, "Что вы хотите узнать?")
         elif message.text == 'Дата окончания срока годности':
 
@@ -52,7 +52,7 @@ def lalala(message):
             item1 = types.InlineKeyboardButton("Хорошо", callback_data='good')
             item2 = types.InlineKeyboardButton("Не очень", callback_data='bad')
 
-            markup.add(item0,item1, item2)
+            markup.add(item0, item1, item2)
 
             bot.send_message(message.chat.id, 'Что вы хотите узнать?', reply_markup=markup)
         else:
@@ -69,47 +69,47 @@ def callback_inline(call):
                 bot.send_message(call.message.chat.id, 'Вот и отличненько 😊')
             elif call.data == 'bad':
                 bot.send_message(call.message.chat.id, 'Бывает 😢')
-            #if call.data == '24':
+            # if call.data == '24':
             #    pass
             # remove inline buttons
-            #bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="😊 Как дела?",
+            # bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="😊 Как дела?",
             #                      reply_markup=None)
 
             # show alert
-            #bot.answer_callback_query(callback_query_id=call.id, show_alert=False,
+            # bot.answer_callback_query(callback_query_id=call.id, show_alert=False,
             #                          text="ЭТО ТЕСТОВОЕ УВЕДОМЛЕНИЕ!!11")
 
     except Exception as e:
         print(repr(e))
 
 
-
-
-
 ####
 
 
-#@bot.message_handler(content_types=['text'])
+# @bot.message_handler(content_types=['text'])
 def welcome(pm):
-    sent_msg = bot.send_message(pm.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",reply_markup=keyboard)
-    bot.register_next_step_handler(sent_msg, number_of_hours_handler)  # Next message will call the name_handler function
+    sent_msg = bot.send_message(pm.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",
+                                reply_markup=keyboard)
+    bot.register_next_step_handler(sent_msg,
+                                   number_of_hours_handler)  # Next message will call the name_handler function
 
-#@bot.message_handler(commands=["newkeyboard"])
+
+# @bot.message_handler(commands=["newkeyboard"])
 
 def number_of_hours_handler(pm):
     try:
         number_of_hours = expiration_date(int(pm.text))
         sent_msg = bot.send_message(pm.chat.id, f"{number_of_hours}")
-        #welcome(pm)
+        # welcome(pm)
     except ValueError:
         sent_msg = bot.send_message(pm.chat.id, f"Сэр, вы ввели некоректное число, попробуйте снова")
-        #welcome(pm)
-    #number_of_hours = pm.text
+        # welcome(pm)
+    # number_of_hours = pm.text
 
-    #bot.register_next_step_handler(sent_msg, age_handler, number_of_hours)  # Next message will call the age_handler function
+    # bot.register_next_step_handler(sent_msg, age_handler, number_of_hours)  # Next message will call the age_handler function
 
 
-#def age_handler(pm, name):
+# def age_handler(pm, name):
 #    age = pm.text
 #    bot.send_message(pm.chat.id, f"Your name is {name}, and your age is {age}.", reply_markup=keyboard)
 """
