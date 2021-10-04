@@ -191,7 +191,6 @@ def lalala(message):
         else:
             bot.send_message(message.chat.id, 'Я не знаю что ответить  😢')
 
-
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     try:
