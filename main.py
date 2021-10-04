@@ -84,7 +84,10 @@ def callback_inline(call):
                 bot.send_message(call.message.chat.id, info_4)
                 test()
             elif call.data == 'tssd':
-                bot.send_message(call.message.chat.id, "info_1")
+                markup = types.InlineKeyboardMarkup(row_width=1)
+                item0 = types.InlineKeyboardButton("ТCСД", callback_data='tssd')
+                markup.add(item0)
+                bot.send_message(call.message.chat.id, "info_1", reply_markup=markup)
     except Exception as e:
         print(repr(e))
 
