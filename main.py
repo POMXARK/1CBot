@@ -84,7 +84,6 @@ def welcome(pm):
     bot.register_next_step_handler(sent_msg,
                                    number_of_hours_handler)  # Next message will call the name_handler function
 
-
 # @bot.message_handler(commands=["newkeyboard"])
 
 def number_of_hours_handler(pm):
