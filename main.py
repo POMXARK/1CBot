@@ -49,7 +49,7 @@ def lalala(message):
             markup.add(item1)
 
             #bot.send_message(message.chat.id, str(random.randint(0, 100)))
-            #sent_msg = bot.send_message(message.chat.id, "")
+            sent_msg = bot.send_message(message.chat.id, "".format(message.from_user, bot.get_me()), parse_mode='html', reply_markup=markup)
         elif message.text == 'Дата окончания срока годности':
 
             sent_msg = bot.send_message(message.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",
