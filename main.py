@@ -11,9 +11,8 @@ git init
 git push heroku master
 """
 
-global text_1
 text_1 = "Инфо"
-
+info_1 = "Когда принесли телефон (ТСД) Печать этикеток и ценников -> заполнить из ТСД -> выгружать пустые строки -> выводить отчет -> выполнить загрузку из ТСД (после удалить задание из устройства ТСД)"
 bot = telebot.TeleBot(config.TOKEN)
 
 keyboard = types.ReplyKeyboardMarkup() # обновить клавиатуру
@@ -65,7 +64,7 @@ def callback_inline(call):
     try:
         if call.message:
             if call.data == 'tsd':
-                bot.send_message(call.message.chat.id, 'Когда принесли  телефон (ТСД)')
+                bot.send_message(call.message.chat.id, info_1)
             elif call.data == 'good':
                 bot.send_message(call.message.chat.id, 'Вот и отличненько 😊')
             elif call.data == 'bad':
