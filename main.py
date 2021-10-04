@@ -22,9 +22,9 @@ bot = telebot.TeleBot(config.TOKEN)
 keyboard = types.ReplyKeyboardMarkup() # обновить клавиатуру
 
 # keyboard
-markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
-item1 = types.KeyboardButton("Дата окончания срока годности")
-markup.add(item1)
+#markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
+#item1 = types.KeyboardButton("Дата окончания срока годности")
+#markup.add(item1)
 
 @bot.message_handler(content_types=['text'])
 def welcome(pm):
