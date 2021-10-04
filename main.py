@@ -78,7 +78,7 @@ def callback_inline(call):
         if call.message:
             if call.data == 'tsd':
                 bot.send_message(call.message.chat.id, 'Когда принесли  телефон (ТСД)')
-            if call.data == 'good':
+            elif call.data == 'good':
                 bot.send_message(call.message.chat.id, 'Вот и отличненько 😊')
             elif call.data == 'bad':
                 bot.send_message(call.message.chat.id, 'Бывает 😢')
