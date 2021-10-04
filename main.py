@@ -62,6 +62,8 @@ def lalala(message):
             markup.add(item0, item1, item2, item3)
 
             bot.send_message(message.chat.id, 'Что вы хотите узнать?', reply_markup=markup)
+        elif message.text == "Поступления":
+            bot.send_message(message.chat.id, 'Я не знаю что ответить  😢')
         else:
             bot.send_message(message.chat.id, 'Я не знаю что ответить  😢')
 
@@ -82,12 +84,7 @@ def callback_inline(call):
                 bot.send_message(call.message.chat.id, info_3)
             elif call.data == 'admission':
                 bot.send_message(call.message.chat.id, info_4)
-                test()
-            elif call.data == 'tssd':
-                markup = types.InlineKeyboardMarkup(row_width=1)
-                item0 = types.InlineKeyboardButton("ТCСД", callback_data='tssd')
-                markup.add(item0)
-                bot.send_message(call.message.chat.id, "info_1", reply_markup=markup)
+                lalala(call)
     except Exception as e:
         print(repr(e))
 
