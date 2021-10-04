@@ -44,8 +44,12 @@ def welcome(message):
 def lalala(message):
     if message.chat.type == 'private':
         if message.text == text_1:
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            item1 = types.KeyboardButton("ТСД")
+            markup.add(item1)
+
             #bot.send_message(message.chat.id, str(random.randint(0, 100)))
-            sent_msg = bot.send_message(message.chat.id, "Информация о работе")
+            #sent_msg = bot.send_message(message.chat.id, "")
         elif message.text == 'Дата окончания срока годности':
 
             sent_msg = bot.send_message(message.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",
