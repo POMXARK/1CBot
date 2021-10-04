@@ -65,7 +65,7 @@ def lalala(message):
         elif message.text == "Поступления":
             bot.send_message(message.chat.id, 'Я не знаю что ответить  😢')
         else:
-            bot.send_message(message.chat.id, 'Я не знаю что ответить  😢')
+            bot.send_message(message.chat.id, 'Я не знаю что ответить')
 
 def test():
     markup = types.InlineKeyboardMarkup(row_width=1)
