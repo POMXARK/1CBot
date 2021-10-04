@@ -39,16 +39,7 @@ def welcome(message):
                          message.from_user, bot.get_me()),
                      parse_mode='html', reply_markup=markup)
 
-@bot.message_handler(content_types=[info_4])
-def keyword_1(message):
 
-    markup = types.InlineKeyboardMarkup(row_width=4)
-    item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
-    item1 = types.InlineKeyboardButton("Наценка", callback_data='nacens')
-    item2 = types.InlineKeyboardButton("Сокращения", callback_data='abbreviations')
-    item3 = types.InlineKeyboardButton("Поступления", callback_data='admission')
-    markup.add(item0, item1, item2, item3)
-    bot.send_message(message.chat.id, 'Что вы хотите узнать__?', reply_markup=markup)
 
 @bot.message_handler(content_types=['text'])
 def lalala(message):
@@ -93,9 +84,7 @@ def callback_inline(call):
             elif call.data == 'abbreviations':
                 bot.send_message(call.message.chat.id, info_3)
             elif call.data == 'admission':
-                bot.send_message(call.message.chat.id, info_4,callback_data='tssd')
-            elif call.data == 'tssd':
-                bot.send_message(call.message.chat.id, "info_4")
+                bot.send_message(call.message.chat.id, info_4)
     except Exception as e:
         print(repr(e))
 
