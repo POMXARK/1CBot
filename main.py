@@ -44,12 +44,8 @@ def welcome(message):
 def lalala(message):
     if message.chat.type == 'private':
         if message.text == text_1:
-            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            item1 = types.KeyboardButton("ТСД")
-            markup.add(item1)
-
             #bot.send_message(message.chat.id, str(random.randint(0, 100)))
-            sent_msg = bot.send_message(message.chat.id, "".format(message.from_user, bot.get_me()), parse_mode='html', reply_markup=markup)
+            sent_msg = bot.send_message(message.chat.id, "Что вы хотите узнать?")
         elif message.text == 'Дата окончания срока годности':
 
             sent_msg = bot.send_message(message.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",
@@ -64,7 +60,8 @@ def lalala(message):
             #bot.send_message(message.chat.id, 'Выбери количество часов', reply_markup=markup)
         elif message.text == '😊 Как дела?':
 
-            markup = types.InlineKeyboardMarkup(row_width=2)
+            markup = types.InlineKeyboardMarkup(row_width=3)
+            item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
             item1 = types.InlineKeyboardButton("Хорошо", callback_data='good')
             item2 = types.InlineKeyboardButton("Не очень", callback_data='bad')
 
@@ -79,6 +76,8 @@ def lalala(message):
 def callback_inline(call):
     try:
         if call.message:
+            if call.data == 'tsd':
+                bot.send_message(call.message.chat.id, 'Когда принесли  телефон (ТСД)')
             if call.data == 'good':
                 bot.send_message(call.message.chat.id, 'Вот и отличненько 😊')
             elif call.data == 'bad':
