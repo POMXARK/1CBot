@@ -55,7 +55,7 @@ def lalala(message):
 
             markup.add(item0,item1, item2)
 
-            bot.send_message(message.chat.id, 'Отлично, сам как?', reply_markup=markup)
+            bot.send_message(message.chat.id, 'Что вы хотите узнать?', reply_markup=markup)
         else:
             bot.send_message(message.chat.id, 'Я не знаю что ответить  😢')
 
