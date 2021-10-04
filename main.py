@@ -10,9 +10,10 @@ heroku login
 git init
 git push heroku master
 """
-global text_1, info_1
-text_1 = "Инфо"
-info_1 = "Когда принесли телефон (ТСД) Печать этикеток и ценников -> заполнить из ТСД -> выгружать пустые строки -> выводить отчет -> выполнить загрузку из ТСД (после удалить задание из устройства ТСД)"
+global text_1, info_1, info_2
+key_1 = "Инфо"
+info_1 = "Когда принесли телефон (ТСД) Выберите:\nПечать этикеток и ценников -> заполнить из ТСД -> выгружать пустые строки -> выводить отчет -> выполнить загрузку из ТСД\n(после удалить задание из устройства ТСД)"
+info_2 = "20%\n хлеб: бородинский, зерновой, батон нарезной, хлеб 1 сорт, 2 сорт.\n 30%\n хлеб купеческий"
 bot = telebot.TeleBot(config.TOKEN)
 
 keyboard = types.ReplyKeyboardMarkup()  # обновить клавиатуру
@@ -23,7 +24,7 @@ def welcome(message):
     # keyboard
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item1 = types.KeyboardButton("🎲")
-    item2 = types.KeyboardButton(text_1)
+    item2 = types.KeyboardButton(key_1)
     item3 = types.KeyboardButton("Дата окончания срока годности")
     markup.add(item1, item2, item3)
 
@@ -45,11 +46,11 @@ def lalala(message):
                                         reply_markup=keyboard)
             bot.register_next_step_handler(sent_msg,
                                            number_of_hours_handler)  # Next message will call the name_handler function
-        elif message.text == text_1:
+        elif message.text == key_1:
 
             markup = types.InlineKeyboardMarkup(row_width=3)
             item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
-            item1 = types.InlineKeyboardButton("Хорошо", callback_data='good')
+            item1 = types.InlineKeyboardButton("Наценка", callback_data='nacens')
             item2 = types.InlineKeyboardButton("Не очень", callback_data='bad')
 
             markup.add(item0, item1, item2)
@@ -65,8 +66,8 @@ def callback_inline(call):
         if call.message:
             if call.data == 'tsd':
                 bot.send_message(call.message.chat.id, info_1)
-            elif call.data == 'good':
-                bot.send_message(call.message.chat.id, 'Вот и отличненько 😊')
+            elif call.data == 'nacens':
+                bot.send_message(call.message.chat.id, info_2)
             elif call.data == 'bad':
                 bot.send_message(call.message.chat.id, 'Бывает 😢')
 
