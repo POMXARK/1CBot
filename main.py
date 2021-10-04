@@ -41,15 +41,14 @@ def welcome(message):
 
 @bot.message_handler(content_types=[info_4])
 def keyword_1(message):
-    if message.chat.type == 'private':
 
-        markup = types.InlineKeyboardMarkup(row_width=4)
-        item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
-        item1 = types.InlineKeyboardButton("Наценка", callback_data='nacens')
-        item2 = types.InlineKeyboardButton("Сокращения", callback_data='abbreviations')
-        item3 = types.InlineKeyboardButton("Поступления", callback_data='admission')
-        markup.add(item0, item1, item2, item3)
-
+    markup = types.InlineKeyboardMarkup(row_width=4)
+    item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
+    item1 = types.InlineKeyboardButton("Наценка", callback_data='nacens')
+    item2 = types.InlineKeyboardButton("Сокращения", callback_data='abbreviations')
+    item3 = types.InlineKeyboardButton("Поступления", callback_data='admission')
+    markup.add(item0, item1, item2, item3)
+    bot.send_message(message.chat.id, 'Что вы хотите узнать__?', reply_markup=markup)
 
 @bot.message_handler(content_types=['text'])
 def lalala(message):
