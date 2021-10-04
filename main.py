@@ -78,6 +78,9 @@ def callback_inline(call):
                 bot.send_message(call.message.chat.id, info_3)
             elif call.data == 'admission':
                 bot.send_message(call.message.chat.id, info_4)
+                markup = types.InlineKeyboardMarkup(row_width=1)
+                item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
+                markup.add(item0)
     except Exception as e:
         print(repr(e))
 
