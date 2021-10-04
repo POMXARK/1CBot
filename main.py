@@ -58,7 +58,7 @@ def lalala(message):
            # item2 = types.InlineKeyboardButton("36", callback_data='36')
            # markup.add(item1, item2)
             #bot.send_message(message.chat.id, 'Выбери количество часов', reply_markup=markup)
-        elif message.text == '😊 Как дела?':
+        elif message.text == text_1:
 
             markup = types.InlineKeyboardMarkup(row_width=3)
             item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
