@@ -26,7 +26,7 @@ keyboard = types.ReplyKeyboardMarkup() # обновить клавиатуру
 def welcome(message):
 
     # keyboard
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item1 = types.KeyboardButton("🎲")
     item2 = types.KeyboardButton("😊")
     item3 = types.KeyboardButton("Дата окончания срока годности")
@@ -110,7 +110,7 @@ def number_of_hours_handler(pm):
         welcome(pm)
     except ValueError:
         sent_msg = bot.send_message(pm.chat.id, f"Сэр, вы ввели некоректное число, попробуйте снова")
-        welcome(pm)
+        #welcome(pm)
     #number_of_hours = pm.text
 
     #bot.register_next_step_handler(sent_msg, age_handler, number_of_hours)  # Next message will call the age_handler function
