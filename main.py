@@ -10,11 +10,15 @@ heroku login
 git init
 git push heroku master
 """
-global text_1, info_1, info_3
+global text_1, info_1, info_3, info_4
 key_1 = "Инфо"
-info_1 = "Когда принесли телефон (ТСД) Выберите:\nПечать этикеток и ценников -> заполнить из ТСД -> выгружать пустые строки -> выводить отчет -> выполнить загрузку из ТСД\n(после удалить задание из устройства ТСД)"
+info_1 = "Когда принесли телефон (ТСД) Выберите:\nПечать этикеток и ценников -> заполнить из ТСД -> выгружать пустые " \
+         "строки -> выводить отчет -> выполнить загрузку из ТСД\n(после удалить задание из устройства ТСД) "
 info_2 = "20%\n хлеб: бородинский, зерновой, батон нарезной, хлеб 1 сорт, 2 сорт.\n 30%\n хлеб купеческий"
 info_3 = "клб-колбаса(кг) с колбасами заходить в ... (проверять дату),\nпфз - полуфабрикаты,\nдлм-деликатесы"
+info_4 = "Терещенко А.Ю (ИП ТАЮ) - торты (ценник с датами, сегодня 8:00), пирожное, салаты. Поставщики(контрагенты) - " \
+         "...\nМир " \
+         "продуктов "
 bot = telebot.TeleBot(config.TOKEN)
 
 keyboard = types.ReplyKeyboardMarkup()  # обновить клавиатуру
@@ -30,7 +34,8 @@ def welcome(message):
     markup.add(item1, item2, item3)
 
     bot.send_message(message.chat.id,
-                     "Добро пожаловать, {0.first_name}!\nЯ - <b>{1.first_name}</b>, бот созданный чтобы быть подопытным кроликом.".format(
+                     "Добро пожаловать, {0.first_name}!\nЯ - <b>{1.first_name}</b>, бот созданный чтобы быть "
+                     "подопытным кроликом.".format(
                          message.from_user, bot.get_me()),
                      parse_mode='html', reply_markup=markup)
 
@@ -49,12 +54,12 @@ def lalala(message):
                                            number_of_hours_handler)  # Next message will call the name_handler function
         elif message.text == key_1:
 
-            markup = types.InlineKeyboardMarkup(row_width=3)
+            markup = types.InlineKeyboardMarkup(row_width=4)
             item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
             item1 = types.InlineKeyboardButton("Наценка", callback_data='nacens')
             item2 = types.InlineKeyboardButton("Сокращения", callback_data='abbreviations')
-
-            markup.add(item0, item1, item2)
+            item3 = types.InlineKeyboardButton("Поступления", callback_data='admission')
+            markup.add(item0, item1, item2, item3)
 
             bot.send_message(message.chat.id, 'Что вы хотите узнать?', reply_markup=markup)
         else:
@@ -71,7 +76,8 @@ def callback_inline(call):
                 bot.send_message(call.message.chat.id, info_2)
             elif call.data == 'abbreviations':
                 bot.send_message(call.message.chat.id, info_3)
-
+            elif call.data == 'admission':
+                bot.send_message(call.message.chat.id, info_4)
     except Exception as e:
         print(repr(e))
 
@@ -85,6 +91,7 @@ def welcome(pm):
                                 reply_markup=keyboard)
     bot.register_next_step_handler(sent_msg,
                                    number_of_hours_handler)  # Next message will call the name_handler function
+
 
 # @bot.message_handler(commands=["newkeyboard"])
 
