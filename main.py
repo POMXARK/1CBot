@@ -65,6 +65,10 @@ def lalala(message):
         else:
             bot.send_message(message.chat.id, 'Я не знаю что ответить  😢')
 
+def test():
+    markup = types.InlineKeyboardMarkup(row_width=1)
+    item0 = types.InlineKeyboardButton("ТCСД", callback_data='tssd')
+    markup.add(item0)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
@@ -78,9 +82,9 @@ def callback_inline(call):
                 bot.send_message(call.message.chat.id, info_3)
             elif call.data == 'admission':
                 bot.send_message(call.message.chat.id, info_4)
-                markup = types.InlineKeyboardMarkup(row_width=1)
-                item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
-                markup.add(item0)
+                test()
+            if call.data == 'tssd':
+                bot.send_message(call.message.chat.id, "info_1")
     except Exception as e:
         print(repr(e))
 
