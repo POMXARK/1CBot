@@ -83,7 +83,7 @@ def callback_inline(call):
             elif call.data == 'admission':
                 bot.send_message(call.message.chat.id, info_4)
                 test()
-            if call.data == 'tssd':
+            elif call.data == 'tssd':
                 bot.send_message(call.message.chat.id, "info_1")
     except Exception as e:
         print(repr(e))
