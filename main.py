@@ -10,6 +10,12 @@ git init
 git push heroku master
 """
 
+markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
+item1 = types.KeyboardButton("🎲 Рандомное число")
+item2 = types.KeyboardButton("😊 Как дела?")
+item3 = types.KeyboardButton("Дата окончания срока годности")
+markup.add(item1, item2, item3)
+
 
 bot = telebot.TeleBot(config.TOKEN)
 
