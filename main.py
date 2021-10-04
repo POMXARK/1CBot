@@ -1,6 +1,6 @@
 import telebot
 import config
-#import random
+import random
 from telebot import types
 from expiration_date import expiration_date
 
@@ -24,10 +24,6 @@ keyboard = types.ReplyKeyboardMarkup() # обновить клавиатуру
 ######
 @bot.message_handler(commands=['start'])
 def welcome(message):
-    sent_msg = bot.send_message(message.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",
-                                reply_markup=keyboard)
-    bot.register_next_step_handler(sent_msg,
-                                   number_of_hours_handler)  # Next message will call the name_handler function
 
     # keyboard
     markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
@@ -48,11 +44,17 @@ def lalala(message):
         if message.text == '🎲 Рандомное число':
             bot.send_message(message.chat.id, str(random.randint(0, 100)))
         elif message.text == 'Дата окончания срока годности':
-            markup = types.InlineKeyboardMarkup(row_width=2)
-            item1 = types.InlineKeyboardButton("24", callback_data='24')
-            item2 = types.InlineKeyboardButton("36", callback_data='36')
-            markup.add(item1, item2)
-            bot.send_message(message.chat.id, 'Выбери количество часов', reply_markup=markup)
+
+            sent_msg = bot.send_message(message.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",
+                                        reply_markup=keyboard)
+            bot.register_next_step_handler(sent_msg,
+                                           number_of_hours_handler)  # Next message will call the name_handler function
+
+           # markup = types.InlineKeyboardMarkup(row_width=2)
+           # item1 = types.InlineKeyboardButton("24", callback_data='24')
+           # item2 = types.InlineKeyboardButton("36", callback_data='36')
+           # markup.add(item1, item2)
+            #bot.send_message(message.chat.id, 'Выбери количество часов', reply_markup=markup)
         elif message.text == '😊 Как дела?':
 
             markup = types.InlineKeyboardMarkup(row_width=2)
