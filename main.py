@@ -11,6 +11,8 @@ git init
 git push heroku master
 """
 
+global  text_1
+text_1 = "Инфо"
 
 bot = telebot.TeleBot(config.TOKEN)
 
@@ -28,7 +30,7 @@ def welcome(message):
     # keyboard
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item1 = types.KeyboardButton("🎲")
-    item2 = types.KeyboardButton("😊")
+    item2 = types.KeyboardButton(text_1)
     item3 = types.KeyboardButton("Дата окончания срока годности")
     markup.add(item1, item2,item3)
 
@@ -41,8 +43,9 @@ def welcome(message):
 @bot.message_handler(content_types=['text'])
 def lalala(message):
     if message.chat.type == 'private':
-        if message.text == '🎲 Рандомное число':
-            bot.send_message(message.chat.id, str(random.randint(0, 100)))
+        if message.text == text_1:
+            #bot.send_message(message.chat.id, str(random.randint(0, 100)))
+            sent_msg = bot.send_message(message.chat.id, "Информация о работе")
         elif message.text == 'Дата окончания срока годности':
 
             sent_msg = bot.send_message(message.chat.id, "Добрый день, Сэр! Пожалуйста, введите количество часов",
