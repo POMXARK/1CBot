@@ -62,7 +62,7 @@ def lalala(message):
             markup.add(item0, item1, item2, item3)
 
             bot.send_message(message.chat.id, 'Что вы хотите узнать?', reply_markup=markup)
-        elif message.text == "Поступления":
+        elif message.text == "Поступления от ИП ТАО":
             bot.send_message(message.chat.id, 'Я не знаю что ответить  😢')
         else:
             bot.send_message(message.chat.id, 'Я не знаю что ответить')
@@ -83,8 +83,18 @@ def callback_inline(call):
             elif call.data == 'abbreviations':
                 bot.send_message(call.message.chat.id, info_3)
             elif call.data == 'admission':
-                bot.send_message(call.message.chat.id, info_4)
-                lalala(call)
+                def lalalas(message):
+                    if message.chat.type == 'private':
+                        #bot.send_message(call.message.chat.id, info_4)
+                        markup = types.InlineKeyboardMarkup(row_width=4)
+                        item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
+                        item1 = types.InlineKeyboardButton("Наценка", callback_data='nacens')
+                        item2 = types.InlineKeyboardButton("Сокращения", callback_data='abbreviations')
+                        item3 = types.InlineKeyboardButton("Поступления", callback_data='admission')
+                        markup.add(item0, item1, item2, item3)
+
+                        bot.send_message(message.chat.id, 'Что вы хотите узнать?', reply_markup=markup)
+
     except Exception as e:
         print(repr(e))
 
