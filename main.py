@@ -10,10 +10,11 @@ heroku login
 git init
 git push heroku master
 """
-global text_1, info_1, info_2
+global text_1, info_1, info_3
 key_1 = "Инфо"
 info_1 = "Когда принесли телефон (ТСД) Выберите:\nПечать этикеток и ценников -> заполнить из ТСД -> выгружать пустые строки -> выводить отчет -> выполнить загрузку из ТСД\n(после удалить задание из устройства ТСД)"
 info_2 = "20%\n хлеб: бородинский, зерновой, батон нарезной, хлеб 1 сорт, 2 сорт.\n 30%\n хлеб купеческий"
+info_3 = "клб-колбаса(кг) с колбасами заходить в ... (проверять дату),\nпфз - полуфабрикаты,\nдлм-деликатесы"
 bot = telebot.TeleBot(config.TOKEN)
 
 keyboard = types.ReplyKeyboardMarkup()  # обновить клавиатуру
@@ -51,7 +52,7 @@ def lalala(message):
             markup = types.InlineKeyboardMarkup(row_width=3)
             item0 = types.InlineKeyboardButton("ТСД", callback_data='tsd')
             item1 = types.InlineKeyboardButton("Наценка", callback_data='nacens')
-            item2 = types.InlineKeyboardButton("Не очень", callback_data='bad')
+            item2 = types.InlineKeyboardButton("Сокращения", callback_data='abbreviations')
 
             markup.add(item0, item1, item2)
 
@@ -68,8 +69,8 @@ def callback_inline(call):
                 bot.send_message(call.message.chat.id, info_1)
             elif call.data == 'nacens':
                 bot.send_message(call.message.chat.id, info_2)
-            elif call.data == 'bad':
-                bot.send_message(call.message.chat.id, 'Бывает 😢')
+            elif call.data == 'abbreviations':
+                bot.send_message(call.message.chat.id, info_3)
 
     except Exception as e:
         print(repr(e))
