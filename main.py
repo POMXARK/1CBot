@@ -25,14 +25,15 @@ bot = telebot.TeleBot(config.TOKEN)
 keyboard = types.ReplyKeyboardMarkup()  # обновить клавиатуру
 
 
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands=['start']) # новые кнопки * обновление кнопок
 def welcome(message):
     # keyboard
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
     item1 = types.KeyboardButton("🎲")
     item2 = types.KeyboardButton(key_1)
+    item4 = types.KeyboardButton(key_2)
     item3 = types.KeyboardButton("Дата окончания срока годности")
-    markup.add(item1, item2, item3)
+    markup.add(item1, item2, item3, item4)
 
     bot.send_message(message.chat.id,
                      "Добро пожаловать, {0.first_name}!\nЯ - <b>{1.first_name}</b>, бот созданный чтобы быть "
