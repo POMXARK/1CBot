@@ -12,7 +12,7 @@ git push heroku master
 """
 global text_1, info_1, info_3, info_4
 key_1 = "Инфо"
-key_2 ="Пересорт/Уценка"
+key_2 = "Пересорт/Уценка"
 info_1 = "Когда принесли телефон (ТСД) Выберите:\nПечать этикеток и ценников -> заполнить из ТСД -> выгружать пустые " \
          "строки -> выводить отчет -> выполнить загрузку из ТСД\n(после удалить задание из устройства ТСД) "
 info_2 = "20%\n хлеб: бородинский, зерновой, батон нарезной, хлеб 1 сорт, 2 сорт.\n 30%\n хлеб купеческий"
@@ -25,7 +25,7 @@ bot = telebot.TeleBot(config.TOKEN)
 keyboard = types.ReplyKeyboardMarkup()  # обновить клавиатуру
 
 
-@bot.message_handler(commands=['start']) # новые кнопки * обновление кнопок
+@bot.message_handler(commands=['start'])  # новые кнопки * обновление кнопок
 def welcome(message):
     # keyboard
     markup = types.ReplyKeyboardMarkup(resize_keyboard=False)
@@ -40,7 +40,6 @@ def welcome(message):
                      "подопытным кроликом.".format(
                          message.from_user, bot.get_me()),
                      parse_mode='html', reply_markup=markup)
-
 
 
 @bot.message_handler(content_types=['text'])
@@ -79,15 +78,18 @@ def lalala(message):
         elif message.text == "Поступления от ИП ТАО":
             bot.send_message(message.chat.id, 'Я не знаю что ответить  😢')
         else:
-           pass # bot.send_message(message.chat.id, 'Я не знаю что ответить')
+            pass  # bot.send_message(message.chat.id, 'Я не знаю что ответить')
 
 
-def discount(pm): # pm - введеное сообщение
+def discount(pm):  # pm - введенное сообщение
     try:
-        number_of_hours = (float(pm.text)) - 10
-        sent_msg = bot.send_message(pm.chat.id, f"{number_of_hours}")
+        x = (float(pm.text))
+        discount_20 = 0.2
+        number_of_hours = x - (x * discount_20)
+        sent_msg = bot.send_message(pm.chat.id, f"Цена при 20% скидке: {number_of_hours}")
     except ValueError:
-        sent_msg = bot.send_message(pm.chat.id, f"Сэр, вы ввели некоректное число, попробуйте снова")
+        sent_msg = bot.send_message(pm.chat.id, f"Сэр, вы ввели некорректное число, попробуйте снова")
+
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
