@@ -12,7 +12,7 @@ git push heroku master
 """
 global text_1, info_1, info_3, info_4
 key_1 = "Инфо"
-key_2 ="Пересорт/Ученка"
+key_2 ="Пересорт/Уценка"
 info_1 = "Когда принесли телефон (ТСД) Выберите:\nПечать этикеток и ценников -> заполнить из ТСД -> выгружать пустые " \
          "строки -> выводить отчет -> выполнить загрузку из ТСД\n(после удалить задание из устройства ТСД) "
 info_2 = "20%\n хлеб: бородинский, зерновой, батон нарезной, хлеб 1 сорт, 2 сорт.\n 30%\n хлеб купеческий"
@@ -70,11 +70,24 @@ def lalala(message):
                                               'сум. розю прих) , если товар уже уцененный  то его режут на куски ('
                                               'наименование товара с %) 4 шт => 79 руб. Пропикать товар, '
                                               'Ценник горизонтальный')
+
+            sent_msg = bot.send_message(message.chat.id, 'Сэр, введите цену товара')
+
+            bot.register_next_step_handler(sent_msg,
+                                           discount)
+
         elif message.text == "Поступления от ИП ТАО":
             bot.send_message(message.chat.id, 'Я не знаю что ответить  😢')
         else:
-            bot.send_message(message.chat.id, 'Я не знаю что ответить')
+           pass # bot.send_message(message.chat.id, 'Я не знаю что ответить')
 
+
+def discount(pm): # pm - введеное сообщение
+    try:
+        number_of_hours = (float(pm.text)) - 10
+        sent_msg = bot.send_message(pm.chat.id, f"{number_of_hours}")
+    except ValueError:
+        sent_msg = bot.send_message(pm.chat.id, f"Сэр, вы ввели некоректное число, попробуйте снова")
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
@@ -88,6 +101,7 @@ def callback_inline(call):
                 bot.send_message(call.message.chat.id, info_3)
             elif call.data == 'admission':
                 bot.send_message(call.message.chat.id, info_4)
+
     except Exception as e:
         print(repr(e))
 
