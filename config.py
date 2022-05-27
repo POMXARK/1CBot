@@ -1,1 +1,1 @@
-TOKEN = "2020475166:AAFI2SkwKaN4okLRF-fR6P2QrTsRNNeVYic" #bot token from @BotFather
+TOKEN = "5395506617:AAHUdrDfu8Zez3N8oyifQlDrQeD43f71Mko" #bot token from @BotFather
